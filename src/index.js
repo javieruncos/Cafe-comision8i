@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import morgan from "morgan"
+import path from "path"
 
 // crear una instancia de express 
 const app = express();
@@ -17,9 +18,18 @@ app.listen(app.get("port"), ()=>{
 app.use(cors()); // permite conexiones remotas
 app.use(express.json()); // permiten interpretar el formato json
 app.use(express.urlencoded({extends:true}));
+app.use(morgan("dev"));
+// permite cargar un archivo estatico
+app.use(express.static(path.join(__dirname,"../public")))
+// console.log(path.join(__dirname,"../public"));
 
 
 // rutas 
+//http://localhost:4000/prueba
+app.get("/prueba",(req,res)=>{
+     res.send("esto es una prueba de una peticioon get")
+})
 
-
-
+app.delete("/prueba",(req,res)=>{
+    res.send("aqui tendria q borrar un dato")
+})
