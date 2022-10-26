@@ -1,4 +1,3 @@
-import { transformIncludesAndExcludes } from "babel-preset-env";
 import mongoose , {Schema} from "mongoose";
 
 const productoSchema = new Schema({
