@@ -49,3 +49,23 @@ export  const crearProductos = async(req,res)=>{
         })
     }
 }
+
+
+
+export const editarProducto = async(req,res)=>{
+    try{
+        // rxtraer el parametro de la ruta y los datos del objeto
+        //validar solicitar a la BD actualizar el producto
+        await Producto.findByIdAndUpdate(req.params.id,req.body)
+        // respondemos al frontend
+        res.status(200).json({
+            mensaje:"el producto pudo ser editaddo correctamente"
+        })
+
+    }catch(error){
+        console.log(error)
+        res.status(400).json({
+            mensaje:"error al intentar editar un producto"
+        })
+    }
+}
