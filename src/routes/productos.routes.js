@@ -34,13 +34,15 @@ router
       ,
       check("imagen")
       .notEmpty()
-      .withMessage("la imagen es obligatoria")
-      .isLength({min:30})
-      .withMessage("la cantidad minima de caracteres es de 30 ")
+      .withMessage("la url de la imagen es obligatoria")
+      .matches(/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/)
+      .withMessage("debe ingresar un url valida")
       ,
       check("categoria")
       .notEmpty()
       .withMessage("la categoria es obligatoria")
+      .isIn(["Bebida fria","Bebida caliente","Dulce","Salado"])
+      .withMessage("debe ingresar una categoria valida")
     ],
     crearProductos
   );
