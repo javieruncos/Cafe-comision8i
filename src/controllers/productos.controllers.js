@@ -17,6 +17,7 @@ export  const listarProductos = async(req,res)=>{
         })
     }
 }
+
 export  const obtenerProductos = async(req,res)=>{
     try{
     //  extraer el id de la ruta
