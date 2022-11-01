@@ -47,7 +47,35 @@ router
 router
   .route("/productos/:id")
   .get(obtenerProductos)
-  .put(editarProducto)
+  .put(  [
+    check("nombreProducto")
+      .notEmpty()
+      .withMessage("El nombre del producto es obligatorio")
+      .isLength({min:2,max:100})
+      .withMessage("El nombre del producto debe tener 2 y 100 caracteres"),
+    check("precio")
+    .notEmpty()
+    .withMessage("el precio es obligatorio")
+    .isNumeric()
+    .withMessage("el precio debe ser un numero")
+    .custom((value)=>{
+       if(value >= 1 && value <= 10000){
+          return true
+       }else{
+          throw new Error("el precio debe estar entre 1 y 10000")
+       }
+    })
+    ,
+    check("imagen")
+    .notEmpty()
+    .withMessage("la imagen es obligatoria")
+    .isLength({min:30})
+    .withMessage("la cantidad minima de caracteres es de 30 ")
+    ,
+    check("categoria")
+    .notEmpty()
+    .withMessage("la categoria es obligatoria")
+  ],editarProducto)
   .delete(borrarProducto);
 
 // app.get("/prueba",(req,res)=>{
